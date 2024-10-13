@@ -5,4 +5,4 @@ local map = LazyVim.safe_keymap_set
 
 map("n", "<BS>", "<CMD>nohlsearch<CR>")
 map("n", "<leader>a", "ggVG", { desc = "Select whole file" })
-map("n", "<leader>m", "<CMD>Neotree reveal<CR>", { desc = "Open neotree with current file in focus" })
+map("n", "<C-n>", "<CMD>Neotree reveal<CR>", { desc = "Open neotree with current file in focus" })
