@@ -20,16 +20,6 @@ return {
     opts = { use_diagnostic_signs = true },
   },
 
-  -- override nvim-cmp and add cmp-emoji
-  {
-    "hrsh7th/nvim-cmp",
-    dependencies = { "hrsh7th/cmp-emoji" },
-    ---@param opts cmp.ConfigSchema
-    opts = function(_, opts)
-      table.insert(opts.sources, { name = "emoji" })
-    end,
-  },
-
   -- change some telescope options and a keymap to browse plugin files
   {
     "nvim-telescope/telescope.nvim",
@@ -193,27 +183,36 @@ return {
     end,
   },
   {
-    "johmsalas/text-case.nvim",
-    dependencies = { "nvim-telescope/telescope.nvim" },
+    "tpope/vim-fugitive",
+    event = "VeryLazy",
     config = function()
-      require("textcase").setup({})
-      require("telescope").load_extension("textcase")
+      vim.schedule(function()
+        vim.keymap.set("n", "<leader>gb", "<cmd>Git blame<cr>", { desc = "Git blame" })
+        vim.keymap.set("n", "<leader>gC", "<cmd>Gdiffsplit!<cr>", { desc = "Conflict 3-way split" })
+        vim.keymap.set("n", "<leader>gd", "<cmd>Gdiff<cr>", { desc = "Gdiff" })
+        vim.keymap.set("n", "<leader>gD", "<cmd>Git log --stat -p<cr>", { desc = "Git log --stat -p" })
+        vim.keymap.set("n", "<leader>ge", ":Gedit ", { desc = "Gedit" }) -- Gedit can take commit objects
+        vim.keymap.set(
+          "n",
+          "<leader>gl",
+          [[<cmd>Git log --format="%h [%ad] [%an] %s"<cr>]],
+          { desc = "Git log oneline" }
+        )
+        vim.keymap.set("n", "<leader>gL", "<cmd>Git log<cr>", { desc = "Git log" })
+        vim.keymap.set("n", "<leader>gg", "<cmd>G<cr>", { desc = "G" })
+        vim.keymap.set("n", "<leader>gP", "<cmd>Git pull", { desc = "Git pull" })
+        vim.keymap.set(
+          "n",
+          "<leader>gp",
+          "<cmd>Git -c push.default=current push<cr>",
+          { desc = "Git -c push.default=current push" }
+        )
+        vim.keymap.set("n", "<leader>gr", "<cmd>Gread<cr>", { desc = "Gread" })
+        vim.keymap.set("n", "<leader>gw", "<cmd>Gwrite<cr>", { desc = "Gwrite" })
+        vim.keymap.set("n", "<leader>gu", "<cmd>diffupdate<cr>", { desc = "diffupdate" })
+        vim.keymap.set("n", "<leader>g2", "<cmd>diffget //2<cr>", { desc = "diffget //2" })
+        vim.keymap.set("n", "<leader>g3", "<cmd>diffget //3<cr>", { desc = "diffget //3" })
+      end)
     end,
-    keys = {
-      "ga", -- Default invocation prefix
-      { "ga.", "<cmd>TextCaseOpenTelescope<CR>", mode = { "n", "x" }, desc = "Telescope" },
-    },
-    cmd = {
-      -- NOTE: The Subs command name can be customized via the option "substitude_command_name"
-      "Subs",
-      "TextCaseOpenTelescope",
-      "TextCaseOpenTelescopeQuickChange",
-      "TextCaseOpenTelescopeLSPChange",
-      "TextCaseStartReplacingCommand",
-    },
-    -- If you want to use the interactive feature of the `Subs` command right away, text-case.nvim
-    -- has to be loaded on startup. Otherwise, the interactive feature of the `Subs` will only be
-    -- available after the first executing of it or after a keymap of text-case.nvim has been used.
-    lazy = false,
   },
 }
