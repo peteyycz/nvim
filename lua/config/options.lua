@@ -19,6 +19,7 @@ opt.textwidth = 120
 opt.relativenumber = true
 
 -- Real programmers don't use TABs but spaces
+opt.shiftwidth = 2
 opt.tabstop = 2
 opt.expandtab = true
 opt.smartindent = true
