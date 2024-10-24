@@ -19,3 +19,5 @@ vim.opt.smartindent = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.gdefault = true -- Set /g flag regex search
+
+vim.o.background = "dark"
