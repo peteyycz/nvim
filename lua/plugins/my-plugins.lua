@@ -32,7 +32,6 @@ return {
         desc = "Find LSP References",
       },
     },
-    -- change some options
     opts = {
       defaults = {
         path_display = { "smart" },
@@ -60,8 +59,6 @@ return {
         "lua",
         "markdown",
         "markdown_inline",
-        "python",
-        "query",
         "regex",
         "tsx",
         "typescript",
@@ -80,7 +77,6 @@ return {
         "stylua",
         "shellcheck",
         "shfmt",
-        "flake8",
       },
     },
   },
