@@ -4,7 +4,9 @@ return {
     opts = {},
   },
   {
-    "echasnovski/mini.surround",
-    opts = {},
+    "kylechui/nvim-surround",
+    version = "*",
+    event = "VeryLazy",
+    opts = {}
   },
 }
