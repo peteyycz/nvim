@@ -6,6 +6,47 @@ return {
     end,
   },
   {
+    "echasnovski/mini.icons",
+    lazy = true,
+    opts = {
+      file = {
+        [".keep"] = { glyph = "󰊢", hl = "MiniIconsGrey" },
+        ["devcontainer.json"] = { glyph = "", hl = "MiniIconsAzure" },
+      },
+      filetype = {
+        dotenv = { glyph = "", hl = "MiniIconsYellow" },
+      },
+    },
+    init = function()
+      package.preload["nvim-web-devicons"] = function()
+        require("mini.icons").mock_nvim_web_devicons()
+        return package.loaded["nvim-web-devicons"]
+      end
+    end,
+  },
+  {
+    "stevearc/oil.nvim",
+    lazy = false,
+    ---@module 'oil'
+    ---@type oil.SetupOpts
+    opts = {
+      default_file_explorer = true,
+      columns = { "icon" },
+      view_options = { show_hidden = true },
+      keymaps = {
+        ["<C-p>"] = false
+      },
+    },
+    keys = {
+      {
+        "-",
+        "<CMD>Oil<CR>",
+        desc = "Open parent directory",
+        mode = "n",
+      }
+    },
+  },
+  {
     "echasnovski/mini.statusline",
     opts = {
       use_icons = true,
