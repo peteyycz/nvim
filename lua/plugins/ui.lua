@@ -53,38 +53,40 @@ return {
     },
   },
   {
-    "nvim-telescope/telescope.nvim",
+    "ibhagwan/fzf-lua",
+    opts = {
+      { 'telescope' },
+      keymap = {
+        builtin = {
+          ["<C-u>"] = "<C-u>",
+        },
+        fzf = {
+          ["ctrl-u"] = "unix-line-discard",
+        },
+      },
+    },
     keys = {
       {
         "<C-p>",
-        -- FIXME: these requires are going to be running before initial install
-        require "telescope.builtin".find_files,
+        function()
+          require "fzf-lua".files()
+        end,
         desc = "Find files",
       },
       {
         "<leader>fs",
-        require "telescope.builtin".live_grep,
+        function()
+          require "fzf-lua".live_grep { resume = true }
+        end,
         desc = "Search in project",
       },
       {
-        "<leader>fu",
-        require "telescope.builtin".lsp_references,
+        "grr",
+        function()
+          require "fzf-lua".lsp_references()
+        end,
         desc = "Find LSP References",
       },
-    },
-    opts = {
-      defaults = {
-        path_display = { "smart" },
-        layout_strategy = "horizontal",
-        layout_config = { prompt_position = "top" },
-        sorting_strategy = "ascending",
-        winblend = 0,
-        mappings = {
-          i = {
-            ["<C-u>"] = false,
-          },
-        },
-      },
-    },
+    }
   },
 }
