@@ -56,6 +56,11 @@ return {
     "ibhagwan/fzf-lua",
     opts = {
       { 'telescope' },
+      winopts = {
+        preview = {
+          hidden = "hidden",
+        },
+      },
       keymap = {
         builtin = {
           ["<C-u>"] = "<C-u>",
