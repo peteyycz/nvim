@@ -25,6 +25,7 @@ return {
     config = function()
       local lspconfig = require "lspconfig"
 
+      lspconfig.gleam.setup {}
       lspconfig.lua_ls.setup {}
       lspconfig.elixirls.setup {}
       lspconfig.vtsls.setup {

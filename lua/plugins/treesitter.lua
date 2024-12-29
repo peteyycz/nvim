@@ -14,6 +14,7 @@ return {
           "elixir",
           "heex",
           "eex",
+          "gleam",
 
           -- JS
           "html",
