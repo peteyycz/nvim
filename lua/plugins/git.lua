@@ -16,8 +16,11 @@ return {
   {
     "folke/snacks.nvim",
     lazy = false,
+    ---@module 'snacks'
     ---@type snacks.Config
-    opts = {},
+    opts = {
+      notifier = {},
+    },
     keys = {
       {
         "<leader>gg",
