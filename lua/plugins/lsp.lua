@@ -1,3 +1,5 @@
+local LspUtil = require "util.lsp"
+
 return {
   {
     "williamboman/mason.nvim",
@@ -25,16 +27,8 @@ return {
     config = function()
       local lspconfig = require "lspconfig"
 
-      local jslike_filetypes = {
-        "javascript",
-        "javascriptreact",
-        "javascript.jsx",
-        "typescript",
-        "typescriptreact",
-        "typescript.tsx",
-      }
       lspconfig.eslint.setup {
-        filetypes = jslike_filetypes,
+        filetypes = LspUtil.jslike_filetypes,
         on_attach = function(_client, bufnr)
           vim.api.nvim_create_autocmd("BufWritePre", {
             buffer = bufnr,
@@ -43,7 +37,8 @@ return {
         end,
       }
       lspconfig.vtsls.setup {
-        filetypes = jslike_filetypes,
+        on_attach = LspUtil.generic_on_attach,
+        filetypes = LspUtil.jslike_filetypes,
         settings = {
           complete_function_calls = true,
           vtsls = {
@@ -72,28 +67,15 @@ return {
           },
         },
       }
-      lspconfig.gleam.setup {}
-      lspconfig.lua_ls.setup {}
-      lspconfig.elixirls.setup {}
-
-      -- TODO maybe refactor this into an on_attach
-      vim.api.nvim_create_autocmd("LspAttach", {
-        callback = function(args)
-          local client = vim.lsp.get_client_by_id(args.data.client_id)
-          if not client then
-            return
-          end
-          -- Disable LSP format for vtsls because eslint lsp takes care of autoformatting for javascript
-          if client.supports_method("textDocument/formatting") and client.name ~= "vtsls" then
-            vim.api.nvim_create_autocmd("BufWritePre", {
-              buffer = args.buf,
-              callback = function()
-                vim.lsp.buf.format({ bufnr = args.buf, id = client.id })
-              end,
-            })
-          end
-        end,
-      })
+      lspconfig.gleam.setup {
+        on_attach = LspUtil.generic_on_attach,
+      }
+      lspconfig.lua_ls.setup {
+        on_attach = LspUtil.generic_on_attach,
+      }
+      lspconfig.elixirls.setup {
+        on_attach = LspUtil.generic_on_attach,
+      }
     end,
   },
 }
