@@ -33,6 +33,8 @@ return {
           "markdown",
           "markdown_inline",
           "c",
+
+          "zig",
         },
         sync_install = false,
         auto_install = false,

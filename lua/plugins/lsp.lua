@@ -8,7 +8,7 @@ return {
   {
     "williamboman/mason-lspconfig.nvim",
     opts = {
-      ensure_installed = { "lua_ls", "vtsls", "elixirls", "eslint" },
+      ensure_installed = { "lua_ls", "vtsls", "elixirls", "eslint", "rust_analyzer" },
     },
   },
   {
@@ -67,13 +67,19 @@ return {
           },
         },
       }
-      lspconfig.gleam.setup {
-        on_attach = LspUtil.generic_on_attach,
-      }
       lspconfig.lua_ls.setup {
         on_attach = LspUtil.generic_on_attach,
       }
+      lspconfig.zls.setup {
+        on_attach = LspUtil.generic_on_attach,
+      }
+      lspconfig.gleam.setup {
+        on_attach = LspUtil.generic_on_attach,
+      }
       lspconfig.elixirls.setup {
+        on_attach = LspUtil.generic_on_attach,
+      }
+      lspconfig.rust_analyzer.setup {
         on_attach = LspUtil.generic_on_attach,
       }
     end,
