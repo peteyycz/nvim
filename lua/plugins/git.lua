@@ -23,6 +23,12 @@ return {
     },
     keys = {
       {
+        "<leader>gb",
+        function() Snacks.gitbrowse() end,
+        desc = "Browse file on remote",
+        mode = "n",
+      },
+      {
         "<leader>gg",
         function() Snacks.lazygit() end,
         desc = "Open lazygit",
