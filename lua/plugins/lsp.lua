@@ -37,7 +37,6 @@ return {
         end,
       }
       lspconfig.vtsls.setup {
-        on_attach = LspUtil.generic_on_attach,
         filetypes = LspUtil.jslike_filetypes,
         settings = {
           complete_function_calls = true,
