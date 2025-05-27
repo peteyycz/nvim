@@ -8,7 +8,7 @@ return {
   {
     "williamboman/mason-lspconfig.nvim",
     opts = {
-      ensure_installed = { "lua_ls", "vtsls", "elixirls", "eslint", "rust_analyzer", "clangd" },
+      ensure_installed = { "lua_ls", "vtsls", "elixirls", "eslint", "rust_analyzer", "clangd", "gopls" },
     },
   },
   {
@@ -65,6 +65,9 @@ return {
             },
           },
         },
+      }
+      lspconfig.gopls.setup {
+        on_attach = LspUtil.generic_on_attach,
       }
       lspconfig.lua_ls.setup {
         on_attach = LspUtil.generic_on_attach,
