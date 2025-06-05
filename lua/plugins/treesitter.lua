@@ -25,6 +25,9 @@ return {
           "tsx",
           "typescript",
 
+          -- Go
+          "templ",
+
           -- Etc
           "xml",
           "yaml",
