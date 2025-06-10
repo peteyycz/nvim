@@ -1,5 +1,8 @@
 return {
   {
+    "github/copilot.vim",
+  },
+  {
     "echasnovski/mini.pairs",
     opts = {},
   },
