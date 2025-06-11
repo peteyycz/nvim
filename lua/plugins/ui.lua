@@ -98,6 +98,13 @@ return {
         desc = "Search in project",
       },
       {
+        "gre",
+        function()
+          require "fzf-lua".diagnostics_workspace()
+        end,
+        desc = "Show workspace diagnostics",
+      },
+      {
         "grr",
         function()
           require "fzf-lua".lsp_references()

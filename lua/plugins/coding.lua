@@ -7,6 +7,9 @@ return {
     opts = {},
   },
   {
+    "github/copilot.vim",
+  },
+  {
     "kylechui/nvim-surround",
     version = "*",
     event = "VeryLazy",
