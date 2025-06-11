@@ -69,6 +69,7 @@ return {
       }
       lspconfig.gopls.setup {
         on_attach = LspUtil.generic_on_attach,
+        filetypes = { "templ" },
       }
       lspconfig.templ.setup {
         on_attach = LspUtil.generic_on_attach,
