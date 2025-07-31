@@ -52,3 +52,30 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     vim.highlight.on_yank()
   end,
 })
+
+vim.api.nvim_create_user_command('VitestWatch', function()
+  -- Save the current buffer before running tests
+  vim.cmd('write')
+
+  local filename = vim.fn.expand('%:p')
+  local quoted_filename = "'" .. filename:gsub("'", "'\\''") .. "'"
+
+  -- Store the original window ID so we can restore focus later
+  local original_win = vim.api.nvim_get_current_win()
+
+  -- Open a vertical split to the right
+  vim.cmd('rightbelow vsplit')
+
+  -- Resize the split to 1/3 of the total columns
+  local columns = vim.o.columns
+  vim.cmd('vertical resize ' .. math.floor(columns / 3))
+
+  -- Open the terminal and run the vitest watch command
+  vim.cmd('term npx vitest watch ' .. quoted_filename)
+
+  -- Restore focus to the original window
+  vim.api.nvim_set_current_win(original_win)
+end, { desc = "Run npx vitest watch <current-file> in a right 1/3 terminal split without focus change" })
+
+map('n', '<leader>t', ':VitestWatch<CR>', options)
+map('n', '?', '<cmd>lua vim.diagnostic.open_float()<CR>', options)

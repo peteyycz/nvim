@@ -30,3 +30,6 @@ vim.opt.smartcase = true
 vim.opt.gdefault = true -- Set /g flag regex search
 
 vim.opt.background = "dark"
+
+-- Set leader key
+vim.g.mapleader = " "

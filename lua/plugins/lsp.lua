@@ -9,7 +9,7 @@ return {
     "williamboman/mason-lspconfig.nvim",
     opts = {
       automatic_enable = false,
-      ensure_installed = { "lua_ls", "vtsls", "elixirls", "eslint", "rust_analyzer", "clangd", "templ", "gopls" },
+      ensure_installed = { "lua_ls", "vtsls", "elixirls", "eslint", "rust_analyzer", "clangd", "templ", "gopls", "phpactor" },
     },
   },
   {
@@ -28,6 +28,14 @@ return {
     config = function()
       local lspconfig = require "lspconfig"
 
+      lspconfig.phpactor.setup {
+        on_attach = LspUtil.generic_on_attach,
+        filetypes = { "php" },
+        init_options = {
+          language_server_php_version = "8.1",
+          workspace_folders = { vim.fn.getcwd() },
+        },
+      }
       lspconfig.eslint.setup {
         filetypes = LspUtil.jslike_filetypes,
         on_attach = function(_client, bufnr)
