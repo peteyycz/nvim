@@ -9,7 +9,7 @@ return {
     "williamboman/mason-lspconfig.nvim",
     opts = {
       automatic_enable = false,
-      ensure_installed = { "lua_ls", "vtsls", "elixirls", "eslint", "rust_analyzer", "clangd", "templ", "gopls", "phpactor" },
+      ensure_installed = { "lua_ls", "vtsls", "elixirls", "eslint", "rust_analyzer", "clangd", "templ", "gopls", "phpactor", "zls" },
     },
   },
   {
@@ -28,6 +28,10 @@ return {
     config = function()
       local lspconfig = require "lspconfig"
 
+      lspconfig.zls.setup {
+        on_attach = LspUtil.generic_on_attach,
+        filetypes = { "zig" },
+      }
       lspconfig.phpactor.setup {
         on_attach = LspUtil.generic_on_attach,
         filetypes = { "php" },
