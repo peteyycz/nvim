@@ -79,6 +79,8 @@ return {
           additional_vim_regex_highlighting = false,
         },
       }
+
+      require("util.treesitter_compat")
     end,
   },
 }
