@@ -15,4 +15,13 @@ return {
     event = "VeryLazy",
     opts = {}
   },
+  -- Language specific stuff
+  {
+    "towolf/vim-helm",
+    ft = "helm",
+  },
+  {
+    "mfussenegger/nvim-jdtls",
+    ft = "java",
+  },
 }

@@ -59,6 +59,8 @@ return {
 
           "zig",
           "odin",
+
+          "nix",
         },
         sync_install = false,
         auto_install = false,

@@ -187,24 +187,13 @@ return {
         on_attach = LspUtil.generic_on_attach,
       })
 
-      -- Java Language Server (Eclipse JDT.LS, JDK 21)
-      vim.lsp.config.jdtls = vim.tbl_deep_extend("force", get_config("jdtls"), {
-        cmd = { "jdtls" },
-        filetypes = { "java" },
+      -- Java is started from ftplugin/java.lua via nvim-jdtls.
+
+      -- Nix Language Server (system-installed via NixOS profile)
+      vim.lsp.config.nixd = vim.tbl_deep_extend("force", get_config("nixd"), {
+        cmd = { "nixd" },
+        filetypes = { "nix" },
         on_attach = LspUtil.generic_on_attach,
-        settings = {
-          java = {
-            configuration = {
-              runtimes = {
-                {
-                  name = "JavaSE-21",
-                  path = vim.env.JAVA_HOME or "/run/current-system/sw/lib/openjdk",
-                  default = true,
-                },
-              },
-            },
-          },
-        },
       })
 
       -- Enable LSP servers for their respective filetypes
@@ -294,11 +283,12 @@ return {
       })
 
       vim.api.nvim_create_autocmd("FileType", {
-        pattern = "java",
+        pattern = "nix",
         callback = function()
-          vim.lsp.enable("jdtls")
+          vim.lsp.enable("nixd")
         end,
       })
+
     end,
   },
 }
