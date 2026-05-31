@@ -61,6 +61,7 @@ return {
           "odin",
 
           "nix",
+          "qmljs",
         },
         sync_install = false,
         auto_install = false,

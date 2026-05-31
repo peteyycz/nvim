@@ -196,6 +196,30 @@ return {
         on_attach = LspUtil.generic_on_attach,
       })
 
+      -- QML Language Server (ships with Qt6 qtdeclarative; used for Quickshell).
+      -- Prefer PATH; fall back to any qtdeclarative qmlls in the Nix store.
+      -- The fallback is a stopgap: add qt6.qtdeclarative to your Nix env so
+      -- qmlls lands on PATH, otherwise nix-collect-garbage can break this path.
+      local qmlls = vim.fn.exepath("qmlls")
+      if qmlls == "" then
+        local found = vim.fn.glob("/nix/store/*-qtdeclarative-*/bin/qmlls", false, true)
+        qmlls = found[#found]
+      end
+      if qmlls and qmlls ~= "" then
+        -- -E lets qmlls honor QML_IMPORT_PATH so it can resolve Quickshell types.
+        vim.lsp.config.qmlls = vim.tbl_deep_extend("force", get_config("qmlls"), {
+          cmd = { qmlls, "-E" },
+          filetypes = { "qml" },
+          on_attach = LspUtil.generic_on_attach,
+        })
+        vim.api.nvim_create_autocmd("FileType", {
+          pattern = "qml",
+          callback = function()
+            vim.lsp.enable("qmlls")
+          end,
+        })
+      end
+
       -- Enable LSP servers for their respective filetypes
       vim.api.nvim_create_autocmd("FileType", {
         pattern = "zig",
