@@ -8,6 +8,10 @@ return {
         overrides = {
           Whitespace = { fg = "#3c3836" },
           NonText = { fg = "#3c3836" },
+          DiffAdd = { bg = "#32361a" },
+          DiffChange = { bg = "#3c3221" },
+          DiffDelete = { bg = "#3c1f1e" },
+          DiffText = { bg = "#665c1e", bold = true },
         },
       })
       vim.cmd.colorscheme "gruvbox"
